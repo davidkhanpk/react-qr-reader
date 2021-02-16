@@ -261,6 +261,8 @@ module.exports = class Reader extends Component {
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       // Send data to web-worker
+      console.log("-------Image Data-------");
+      console.log(imageData);
       this.worker.postMessage(imageData)
     } else {
       // Preview not ready -> check later
@@ -270,6 +272,8 @@ module.exports = class Reader extends Component {
   handleWorkerMessage(e) {
     const { onScan, legacyMode, delay } = this.props
     const decoded = e.data
+    console.log("----- Devode Image ------")
+    console.log(decode || null);
     onScan(decoded || null)
 
     if (!legacyMode && typeof delay == 'number' && this.worker) {
